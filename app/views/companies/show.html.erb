@@ -1,0 +1,23 @@
+<div class="jumbotron">
+   
+  <h1 class="display-4">
+    <%= @company.title %>
+
+  </h1>
+  <p class="lead">
+    <%= @company.summary %>  
+  </p>
+  <br/>
+
+<%= link_to 'Edit', edit_company_path(@company), class:"btn btn-secondary" %>
+<%= link_to 'Delete', @company, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-danger" %>
+<br><br>
+<%= link_to 'Back', companies_path, class:"btn btn-dark" %>
+
+</div>
+
+
+
+
+
+
