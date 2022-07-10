@@ -1,3 +1,3 @@
 class Company < ApplicationRecord
-    has_many :friends
+    has_many :users
 end
