@@ -2,6 +2,13 @@
     <section class="company-head">
         <h2><%= link_to company.title, company_path(company) %></h2>
         <small>
+            <% if user_signed_in? && current_user.admin? %>
+            |
+            <%= link_to 'Edit', edit_company_path(company) %>
+            |
+            <%= link_to 'Delete', company, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            |
+        <% end %>
         </small>
     </section>
 </article>

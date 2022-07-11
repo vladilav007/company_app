@@ -9,21 +9,41 @@
   </p>
   <br/>
 
-  <% if user_signed_in? %>
-    <% if current_user.company_id == @company.id %>
-        <% @company.users.each do |c|  %>
-            <li><%= "#{c.name} #{c.position}"%></li>
+  <% if user_signed_in?  %>
+    <% if current_user.company_id == @company.id || current_user.admin? %>
+        <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @company.users.each do |c| %>
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= c.email %></td>
+          <td><%= c.position %></td>
+        </tr>
         <% end %>
+    </tbody>
+  </table>
     <% end %>
   <% end %>
 
 <br/>
-<%= link_to 'Edit', edit_company_path(@company), class:"btn btn-secondary" %>
-<%= link_to 'Delete', @company, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-danger" %>
+<% if user_signed_in? && current_user.admin? %>
+  <%= link_to 'Edit', edit_company_path(@company), class:"btn btn-secondary" %>
+  <%= link_to 'Delete', @company, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-danger" %>
+<% end %>
 <br><br>
 <%= link_to 'Back', companies_path, class:"btn btn-dark" %>
 
 </div>
+
+
 
 
 
