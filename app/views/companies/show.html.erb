@@ -9,6 +9,15 @@
   </p>
   <br/>
 
+  <% if user_signed_in? %>
+    <% if current_user.company_id == @company.id %>
+        <% @company.users.each do |c|  %>
+            <li><%= "#{c.name} #{c.position}"%></li>
+        <% end %>
+    <% end %>
+  <% end %>
+
+<br/>
 <%= link_to 'Edit', edit_company_path(@company), class:"btn btn-secondary" %>
 <%= link_to 'Delete', @company, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-danger" %>
 <br><br>
